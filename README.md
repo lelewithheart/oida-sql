@@ -3,10 +3,10 @@
 MySQL, aber im Dialekt. Und am Schluss sagst **OIDA**.
 
 ```sql
-ERSTÖN TABÖN leit (id ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL, name KETTN(50) MUASS SEI) OIDA;
-EINEHAUN IN leit (name) WERTE ('Franz'), ('Resi') OIDA;
-GIB MA WIAVÜ(*) OIS leit VON leit WO name SO WIA 'F%' OIDA;
-GUSCH DI TABÖN leit OIDA;
+ERSTÖN TABÖN leit (id ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL, name KETTN(50) MUASS SEI) OIDA
+EINEHAUN IN leit (name) WERTE ('Franz'), ('Resi') OIDA
+GIB MA WIAVÜ(*) OIS leit VON leit WO name SO WIA 'F%' OIDA
+GUSCH DI TABÖN leit OIDA
 ```
 
 Das ist ganz normales MySQL, nur heißen die Wörter anders. Ein kleiner JDBC-Treiber setzt sich vor
@@ -75,6 +75,14 @@ Jeder umgeschriebene Befehl wird zur Kontrolle wieder zurück übersetzt und mit
 
 ## Gut zu wissen
 
+- **`OIDA` statt Strichpunkt:** Jedes `OIDA` beendet einen Befehl, ein Strichpunkt danach ist erlaubt, aber
+  überflüssig. Mehrere Befehle auf einmal trennt der Treiber selbst (dafür schaltet er bei der Verbindung
+  `allowMultiQueries` ein). In Triggern bleiben die Strichpunkte im Inneren.
+- **Übersetzen beim Tippen und Einfügen:** Das Plugin ersetzt MySQL-Wörter, sobald sie fertig getippt sind,
+  und schreibt eingefügtes MySQL um. Abschalten unter *Tools → OIDA-SQL: Beim Tippen und Einfügen übersetzen*.
+- **Vorschläge:** Die Vorschlagsliste enthält die Dialekt-Wörter, auffindbar auch über das MySQL-Wort.
+- **OIDA-Datei oder nicht:** Das Plugin greift in SQL-Dateien, in denen ein Befehl mit `OIDA` aufhört, und in
+  Konsolen, die an einer Verbindung mit dem OIDA-SQL-Treiber hängen.
 - **Namen, die wie Dialekt-Wörter heißen:** Eine Spalte, die z.B. `von` heißt, in Backticks schreiben
   (`` `von` ``), sonst wird sie mitübersetzt. `tabelle.von` geht ohne.
 - **Ausnahmen sind Schlupflöcher:** DataGrip schickt im Hintergrund selbst SQL (Tabellen laden, Zellen
@@ -92,10 +100,11 @@ Jeder umgeschriebene Befehl wird zur Kontrolle wieder zurück übersetzt und mit
 
 ```
 JAVA -cp build\classes test\UebersetzerTest.java
+JAVA -cp build\classes test\TippenTest.java
 JAVA -cp build\plugin test\OidaTextTest.java
 JAVA -cp oida-sql-datagrip-plugin.jar test\TreiberTest.java
 ```
 
-`DatenbankTest`, `BeispieleTest` und `SkriptTest` brauchen eine MySQL-Datenbank und den MySQL-Treiber
+`DatenbankTest`, `BeispieleTest`, `MehrfachTest` und `SkriptTest` brauchen eine MySQL-Datenbank und den MySQL-Treiber
 auf dem Klassenpfad; die Zugangsdaten kommen aus den Umgebungsvariablen `OIDA_TEST_URL`,
 `OIDA_TEST_USER` und `OIDA_TEST_PW`.

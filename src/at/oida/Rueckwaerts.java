@@ -42,10 +42,13 @@ public final class Rueckwaerts {
     private final List<Token> tokens;
     private final int[] pos;
     private final Ergebnis ergebnis = new Ergebnis();
+    /** Für eingefügten Text: Strichpunkt wird zum Endwort, Reste ohne Strichpunkt bleiben ohne Endwort, keine Backticks. */
+    private final boolean einfuegen;
 
-    private Rueckwaerts(Uebersetzer u, String sql) {
+    private Rueckwaerts(Uebersetzer u, String sql, boolean einfuegen) {
         this.u = u;
         this.sql = sql;
+        this.einfuegen = einfuegen;
         this.tokens = Uebersetzer.zerlegen(sql);
         this.pos = new int[tokens.size() + 1];
         for (int i = 0; i < tokens.size(); i++) {
@@ -54,9 +57,20 @@ public final class Rueckwaerts {
     }
 
     public static Ergebnis umschreiben(Uebersetzer u, String mysql) {
-        Rueckwaerts r = new Rueckwaerts(u, mysql);
+        Rueckwaerts r = new Rueckwaerts(u, mysql, false);
         r.lauf();
         return r.ergebnis;
+    }
+
+    /**
+     * Für Text, der in eine OIDA-SQL-Datei eingefügt wird: MySQL-Wörter werden übersetzt, der
+     * Strichpunkt am Ende eines Befehls wird zum Endwort. Ein Rest ohne Strichpunkt bekommt kein
+     * Endwort (es könnte nur ein Stück sein), und was schon Dialekt ist, bleibt unverändert.
+     */
+    static String fuersEinfuegen(Uebersetzer u, String text) {
+        Rueckwaerts r = new Rueckwaerts(u, text, true);
+        r.lauf();
+        return r.ergebnis.text.toString();
     }
 
     // ------------------------------------------------------- Befehle trennen
@@ -168,7 +182,7 @@ public final class Rueckwaerts {
             letztes--;
         }
         // Ein übrig gebliebenes // oder $$ am Ende (Skript ohne passendes DELIMITER) nicht mitnehmen.
-        if (trenner.isEmpty()) {
+        if (trenner.isEmpty() && !einfuegen) {
             while (letztes >= von && (unwichtig(tokens.get(letztes)) || tokens.get(letztes).text.equals("/")
                     || tokens.get(letztes).text.equals("$$"))) {
                 letztes--;
@@ -176,6 +190,21 @@ public final class Rueckwaerts {
         }
         if (letztes < von) {   // nur Leerraum und Kommentare
             ergebnis.text.append(sql, pos[von], pos[bis]).append(trenner);
+            return;
+        }
+
+        if (einfuegen) {
+            Token ende = tokens.get(letztes);
+            boolean hatSchonEndwort = ende.art == Art.WORT && Uebersetzer.norm(ende.text).equals(u.endwortGross());
+            ergebnis.text.append(dialekt(von, letztes));
+            if (!trenner.isEmpty() && !hatSchonEndwort) {
+                ergebnis.text.append(' ').append(u.endwortGross());
+            }
+            ergebnis.text.append(sql, pos[letztes + 1], pos[bis]);
+            if (!trenner.equals(";")) {
+                ergebnis.text.append(trenner);   // nur der Strichpunkt ist überflüssig, // oder $$ bleiben
+            }
+            ergebnis.befehle++;
             return;
         }
 
@@ -208,6 +237,10 @@ public final class Rueckwaerts {
             if (p != null && p.woerter.length > 1 && p.woerter[0].equals("NOT") && nachIs(i)) {
                 p = einzelwort(i, ende);   // "IS NOT NULL" soll "IS NED NUI" werden, nicht "IS MUASS SEI"
             }
+            if (einfuegen && p != null && p.woerter.length == 1 && u.findeDialekt(tokens, i, new int[1]) != null
+                    && nachDialektWort(i)) {
+                p = null;   // "EINEHAUN IN" ist schon Dialekt (IN = INTO) und darf nicht zu DRINNA werden
+            }
             if (p != null && ende[0] <= bis) {
                 boolean klein = t.text.equals(t.text.toLowerCase(Locale.ROOT));
                 s.append(klein ? p.dialekt.toLowerCase(Locale.ROOT) : p.dialekt);
@@ -215,6 +248,10 @@ public final class Rueckwaerts {
                 continue;
             }
             String gross = Uebersetzer.norm(t.text);
+            if (einfuegen) {
+                s.append(t.text);   // könnte schon Dialekt sein: nicht anfassen
+                continue;
+            }
             if (u.findeDialekt(tokens, i, ende) != null || gross.equals(u.endwortGross())) {
                 // Ein Name, der zufällig wie ein Dialekt-Wort heißt: schützen.
                 s.append('`').append(t.text).append('`');
@@ -225,6 +262,14 @@ public final class Rueckwaerts {
             ergebnis.englischGeblieben.merge(gross, 1, Integer::sum);
         }
         return s.toString();
+    }
+
+    /** Steht direkt davor (nur durch Leerraum getrennt) ein Dialekt-Wort? */
+    private boolean nachDialektWort(int i) {
+        if (i < 2 || tokens.get(i - 1).art != Art.LEER || tokens.get(i - 2).art != Art.WORT) {
+            return false;
+        }
+        return u.findeDialekt(tokens, i - 2, new int[1]) != null;
     }
 
     private boolean nachIs(int i) {

@@ -71,6 +71,11 @@ public final class OidaDriver implements Driver {
         }
         Object log = eigenschaften.remove("oidaLog");
         Protokoll.einschalten(log != null ? log.toString() : System.getProperty("oida.log"));
+        // Mehrere Befehle auf einmal (am Endwort getrennt) gehen als "a; b; c" zu MySQL.
+        // Das erlaubt MySQL nur mit dieser Einstellung. Wer sie selbst setzt, behält seinen Wert.
+        if (eigenschaften.getProperty("allowMultiQueries") == null && !url.contains("allowMultiQueries")) {
+            eigenschaften.setProperty("allowMultiQueries", "true");
+        }
 
         Uebersetzer uebersetzer;
         try {

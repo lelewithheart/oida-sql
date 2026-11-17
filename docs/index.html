@@ -44,10 +44,10 @@
   <h1><span>OIDA</span>-SQL</h1>
   <p class="unter">MySQL, aber im Dialekt. Und am Schluss sagst <b>OIDA</b>.</p>
 
-<pre><span class="w">ERSTÖN TABÖN</span> leit (id <span class="w">ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL</span>, name <span class="w">KETTN</span>(50)) <span class="o">OIDA</span>;
-<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>;
-<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="o">OIDA</span>;
-<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span>;</pre>
+<pre><span class="w">ERSTÖN TABÖN</span> leit (id <span class="w">ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL</span>, name <span class="w">KETTN</span>(50)) <span class="o">OIDA</span>
+<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>
+<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="o">OIDA</span>
+<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span></pre>
 
   <p>Das ist ganz normales MySQL, nur heißen die Wörter anders. Ein kleiner Treiber übersetzt jeden Befehl,
      bevor er zur Datenbank geht. Du brauchst <b>DataGrip</b> und eine <b>MySQL-Datenbank</b>.</p>
@@ -94,8 +94,18 @@
     </ol>
   </div>
 
-  <p><b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA;</code> eintippen, Cursor in die Zeile,
+  <p><b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA</code> eintippen, Cursor in die Zeile,
      <code>Strg+Enter</code>. Das ist <code>SHOW TABLES</code>.</p>
+
+  <h2>Schreiben</h2>
+  <ol>
+    <li>Am Ende von jedem Befehl steht <code>OIDA</code>. Einen Strichpunkt brauchst du nicht.</li>
+    <li>Tippst du MySQL, wird es gleich übersetzt: Aus <code>SELECT</code> wird beim Leerzeichen <code>GIB MA</code>.
+        Fügst du MySQL ein, kommt es als OIDA-SQL an.</li>
+    <li>Die Vorschlagsliste kennt die Dialekt-Wörter. Du findest sie auch über das englische Wort.</li>
+    <li>Heißt eine Spalte wie ein Dialekt- oder MySQL-Wort (<code>von</code>, <code>date</code>), dann in Backticks: <code>`von`</code></li>
+  </ol>
+  <p class="klein">Das Übersetzen beim Tippen lässt sich abschalten: <b>Tools → OIDA-SQL: Beim Tippen und Einfügen übersetzen</b>.</p>
 
   <h2>Updates</h2>
   <p>Kommen von selbst. DataGrip meldet bei den Plugins, wenn es eine neue Version gibt.
@@ -107,8 +117,6 @@
     <a class="knopf" href="Anleitung.pdf">Anleitung (PDF)</a>
     <a class="knopf hell" href="https://github.com/lelewithheart/oida-sql">Quellcode auf GitHub</a>
   </div>
-  <p class="klein">Du weißt ein Wort nicht? Schreib es englisch hin und führ den Befehl aus,
-     die Fehlermeldung sagt dir das richtige.</p>
 
   <footer>OIDA-SQL · Ohne OIDA geht goa nix.</footer>
 </main>

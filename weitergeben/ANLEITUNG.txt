@@ -3,10 +3,10 @@ OIDA-SQL
 
 MySQL, aber im Dialekt. Jeder Befehl muss mit OIDA aufhören.
 
-    ERSTÖN TABÖN leit (id ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL, name KETTN(50)) OIDA;
-    EINEHAUN IN leit (name) WERTE ('Franz'), ('Resi') OIDA;
-    GIB MA * VON leit WO name SO WIA 'F%' OIDA;
-    GUSCH DI TABÖN leit OIDA;
+    ERSTÖN TABÖN leit (id ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL, name KETTN(50)) OIDA
+    EINEHAUN IN leit (name) WERTE ('Franz'), ('Resi') OIDA
+    GIB MA * VON leit WO name SO WIA 'F%' OIDA
+    GUSCH DI TABÖN leit OIDA
 
 Du brauchst nur DataGrip und eine MySQL-Datenbank. Herunterladen musst du nichts,
 DataGrip holt sich alles von dieser Adresse:
@@ -54,10 +54,13 @@ BENUTZEN
 
 Konsole öffnen, Befehl schreiben, Cursor hinein, Strg+Enter.
 
-  - Am Ende von jedem Befehl:  OIDA;
-  - Englisch geht nicht mehr. Wer SELECT schreibt, bekommt gesagt, wie es richtig heißt.
+  - Am Ende von jedem Befehl steht OIDA. Einen Strichpunkt brauchst du nicht.
+  - Tippst du MySQL, wird es gleich übersetzt: Aus SELECT wird beim Leerzeichen GIB MA.
+    Fügst du MySQL ein, kommt es als OIDA-SQL an.
+    Abschalten: Tools -> "OIDA-SQL: Beim Tippen und Einfügen übersetzen"
+  - Die Vorschlagsliste kennt die Dialekt-Wörter. Du findest sie auch über das englische Wort.
   - Groß- und Kleinschreibung ist egal.
-  - Heißt eine Spalte wie ein Dialekt-Wort (z.B. von), dann in Backticks: `von`
+  - Heißt eine Spalte wie ein Dialekt- oder MySQL-Wort (von, date), dann in Backticks: `von`
 
 
 DIE WICHTIGSTEN WÖRTER
@@ -92,5 +95,3 @@ DIE WICHTIGSTEN WÖRTER
 
 Alle Wörter:  https://lelewithheart.github.io/oida-sql/Woerterbuch.pdf
 
-Du weißt ein Wort nicht? Schreib es englisch hin und führ den Befehl aus,
-die Fehlermeldung sagt dir das richtige Wort.

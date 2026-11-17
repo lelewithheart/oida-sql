@@ -22,10 +22,10 @@
 <pre class="sql"><span class="w">ERSTÖN TABÖN</span> leit (
     id   <span class="w">ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL</span>,
     name <span class="w">KETTN</span>(<span class="z">50</span>) <span class="w">MUASS SEI</span>
-) <span class="o">OIDA</span>;
-<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>;
-<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="w">DA REIH NOCH</span> name <span class="o">OIDA</span>;
-<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span>;</pre>
+) <span class="o">OIDA</span>
+<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>
+<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="w">DA REIH NOCH</span> name <span class="o">OIDA</span>
+<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span></pre>
 
   <p>Das ist ganz normales MySQL, nur heißen die Wörter anders. Ein kleiner Treiber übersetzt jeden Befehl,
      bevor er zur Datenbank geht. Du brauchst nur <b>DataGrip</b> und eine <b>MySQL-Datenbank</b>.</p>
@@ -79,7 +79,7 @@
   </div>
 
   <div class="hinweis">
-    <b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA;</code> eintippen, Cursor in die Zeile,
+    <b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA</code> eintippen, Cursor in die Zeile,
     <kbd>Strg</kbd> <kbd>Enter</kbd>. Das ist <span class="mono">SHOW TABLES</span>.
   </div>
 
@@ -98,22 +98,22 @@
       <h2 style="margin-top: 0;">So geht’s</h2>
       <ul class="regeln">
         <li>Befehl schreiben, Cursor hinein, <kbd>Strg</kbd> <kbd>Enter</kbd>.</li>
-        <li>Am Ende von jedem Befehl steht <code>OIDA;</code></li>
-        <li>Englisch geht nicht mehr. Wer <span class="mono">SELECT</span> schreibt, bekommt gesagt, wie es richtig heißt.</li>
+        <li>Am Ende von jedem Befehl steht <code>OIDA</code>. Einen Strichpunkt brauchst du nicht.</li>
+        <li>Tippst du MySQL, wird es gleich übersetzt: Aus <span class="mono">SELECT</span> wird beim Leerzeichen <code>GIB MA</code>. Beim Einfügen auch.</li>
+        <li>Die Vorschlagsliste kennt die Dialekt-Wörter. Du findest sie auch über das englische Wort.</li>
         <li>Groß- und Kleinschreibung ist egal: <code>gib ma</code> geht genauso.</li>
-        <li>Namen von Tabellen und Spalten bleiben, wie sie sind.</li>
-        <li>Heißt eine Spalte wie ein Dialekt-Wort (zum Beispiel <span class="mono">von</span>), dann in Backticks: <code>`von`</code></li>
+        <li>Heißt eine Spalte wie ein Dialekt- oder MySQL-Wort (<span class="mono">von</span>, <span class="mono">date</span>), dann in Backticks: <code>`von`</code></li>
       </ul>
     </div>
     <div>
       <h2 style="margin-top: 0;">Was du zu hören bekommst</h2>
       <div class="blasen">
         <div class="blase"><span class="wann">OIDA vergessen</span>Heast, wo is des <b>OIDA</b>?</div>
-        <div class="blase"><span class="wann">Englisch geschrieben</span>SELECT? Samma do in Amerika? Bei uns haaßt des <b>GIB MA</b>.</div>
+        <div class="blase"><span class="wann">Englisch stehen gelassen</span>SELECT? Samma do in Amerika? Bei uns haaßt des <b>GIB MA</b>.</div>
         <div class="blase"><span class="wann">Tabelle gibt es nicht</span>Na servas! MySQL sogt: Table 'leit' doesn't exist</div>
       </div>
-      <p style="font-size: 8.8pt; color: var(--grau); margin-top: 2.5mm;">Tipp: Weißt du ein Wort nicht, schreib es englisch hin.
-         Die Fehlermeldung sagt dir das richtige.</p>
+      <p style="font-size: 8.8pt; color: var(--grau); margin-top: 2.5mm;">Das Übersetzen beim Tippen lässt sich abschalten:
+         <b>Tools → OIDA-SQL: Beim Tippen und Einfügen übersetzen</b>.</p>
     </div>
   </div>
 

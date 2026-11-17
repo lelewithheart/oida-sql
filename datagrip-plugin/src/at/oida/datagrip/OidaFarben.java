@@ -86,7 +86,7 @@ public final class OidaFarben implements Annotator {
         return stellen;
     }
 
-    private static Uebersetzer woerterbuch() {
+    static Uebersetzer woerterbuch() {
         if (woerterbuch == null && !woerterbuchKaputt) {
             try {
                 woerterbuch = Uebersetzer.ausJar();

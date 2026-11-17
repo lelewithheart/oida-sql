@@ -281,6 +281,51 @@ public final class Uebersetzer {
         rueckPhrasen.values().forEach(l -> l.sort(laengsteZuerst));
     }
 
+    /**
+     * Alle Wortpaare aus dem Wörterbuch, für die Vorschläge im Editor.
+     *
+     * @return je Dialekt-Variante ein Paar {Dialekt, MySQL}
+     */
+    public List<String[]> alleWoerter() {
+        List<String[]> paare = new ArrayList<>();
+        for (List<Phrase> liste : dialektPhrasen.values()) {
+            for (Phrase p : liste) {
+                paare.add(new String[] {p.dialekt, p.englisch});
+            }
+        }
+        paare.sort((a, b) -> a[0].compareTo(b[0]));
+        return paare;
+    }
+
+    /** Ist die Wortfolge tokens[von..bis] (nur durch Leerraum getrennt) der Anfang einer längeren MySQL-Phrase? */
+    boolean istAnfangLaengererMysqlPhrase(List<Token> tokens, int von, int bis) {
+        List<String> woerter = new ArrayList<>();
+        for (int i = von; i <= bis; i++) {
+            Token t = tokens.get(i);
+            if (t.art == Art.WORT) {
+                woerter.add(norm(t.text));
+            } else if (t.art != Art.LEER) {
+                return false;
+            }
+        }
+        List<Phrase> kandidaten = woerter.isEmpty() ? null : rueckPhrasen.get(woerter.get(0));
+        if (kandidaten == null) {
+            return false;
+        }
+        for (Phrase p : kandidaten) {
+            if (p.woerter.length > woerter.size()) {
+                boolean passt = true;
+                for (int w = 0; w < woerter.size(); w++) {
+                    passt &= p.woerter[w].equals(woerter.get(w));
+                }
+                if (passt) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /** Dialekt-Phrase, die an Position i beginnt (oder null). bis[0] = Index des letzten Tokens. */
     Phrase findeDialekt(List<Token> tokens, int i, int[] bis) {
         return finde(dialektPhrasen, tokens, i, bis);
@@ -359,23 +404,65 @@ public final class Uebersetzer {
             return sql;   // leer oder nur Kommentare
         }
 
-        Token ende = tokens.get(letztes);
-        if (ende.art != Art.WORT || !norm(ende.text).equals(endwort)) {
-            Pattern ausnahme = passendeAusnahme(tokens);
-            if (ausnahme != null) {
-                Protokoll.schreibe("DURCHGELASSEN (Ausnahme " + ausnahme.pattern() + "): " + sql);
-                return sql;
+        // Jedes Endwort beendet einen Befehl. Ein Strichpunkt danach ist erlaubt, aber überflüssig.
+        List<Integer> enden = new ArrayList<>();
+        for (int i = 0; i < tokens.size(); i++) {
+            Token t = tokens.get(i);
+            if (t.art == Art.WORT && norm(t.text).equals(endwort) && !istNameMitPunkt(tokens, i)) {
+                enden.add(i);
+            }
+        }
+
+        if (enden.isEmpty() || enden.get(enden.size() - 1) != letztes) {
+            if (enden.isEmpty()) {
+                Pattern ausnahme = passendeAusnahme(tokens);
+                if (ausnahme != null) {
+                    Protokoll.schreibe("DURCHGELASSEN (Ausnahme " + ausnahme.pattern() + "): " + sql);
+                    return sql;
+                }
             }
             Protokoll.schreibe("BLOCKIERT (Endwort fehlt): " + sql);
             throw new SQLSyntaxErrorException(zufall(fehlerKeinEndwort), "42000");
         }
 
-        tokens.remove(letztes);
-        if (letztes > 0 && tokens.get(letztes - 1).art == Art.LEER) {
-            tokens.remove(letztes - 1);
+        if (enden.size() == 1) {
+            tokens.remove(letztes);
+            if (letztes > 0 && tokens.get(letztes - 1).art == Art.LEER) {
+                tokens.remove(letztes - 1);
+            }
+            return woerter(tokens);
         }
 
-        StringBuilder mysql = new StringBuilder(sql.length());
+        // Mehrere Befehle auf einmal: am Endwort trennen und für MySQL mit Strichpunkten verbinden.
+        // (Der Treiber schaltet dafür bei der Verbindung allowMultiQueries ein.)
+        StringBuilder alle = new StringBuilder(sql.length());
+        int von = 0;
+        for (int ende : enden) {
+            List<Token> teil = new ArrayList<>(tokens.subList(von, ende));
+            boolean wichtig = false;
+            for (Token t : teil) {
+                wichtig |= t.art != Art.LEER && t.art != Art.KOMMENTAR;
+            }
+            if (wichtig) {
+                if (alle.length() > 0) {
+                    alle.append(";\n");
+                }
+                alle.append(woerter(teil).trim());
+            }
+            von = ende + 1;
+            while (von < tokens.size() && tokens.get(von).art == Art.LEER) {
+                von++;
+            }
+            if (von < tokens.size() && tokens.get(von).text.equals(";")) {
+                von++;
+            }
+        }
+        return alle.toString();
+    }
+
+    /** Ersetzt in einem Befehl (ohne Endwort) die Dialekt-Wörter durch die MySQL-Wörter. */
+    private String woerter(List<Token> tokens) throws SQLException {
+        StringBuilder mysql = new StringBuilder();
         for (int i = 0; i < tokens.size(); i++) {
             Token t = tokens.get(i);
             if (t.art != Art.WORT || istNameMitPunkt(tokens, i)) {

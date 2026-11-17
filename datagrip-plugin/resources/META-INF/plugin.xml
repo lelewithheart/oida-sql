@@ -19,7 +19,19 @@
   <extensions defaultExtensionNs="com.intellij">
     <highlightErrorFilter implementation="at.oida.datagrip.OidaFehlerFilter"/>
     <annotator language="SQL" implementationClass="at.oida.datagrip.OidaFarben"/>
+    <typedHandler implementation="at.oida.datagrip.OidaTippen"/>
+    <enterHandlerDelegate implementation="at.oida.datagrip.OidaEnter"/>
+    <copyPastePreProcessor implementation="at.oida.datagrip.OidaEinfuegen"/>
+    <completion.contributor language="SQL" implementationClass="at.oida.datagrip.OidaVorschlaege" order="first"/>
   </extensions>
+
+  <actions>
+    <action id="Oida.Sql.AutoUebersetzen" class="at.oida.datagrip.OidaSchalter"
+            text="OIDA-SQL: Beim Tippen und Einfügen übersetzen"
+            description="Schreibt MySQL-Wörter beim Tippen und Einfügen automatisch in OIDA-SQL um">
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+  </actions>
 
   <applicationListeners>
     <listener class="at.oida.datagrip.OidaVorAusfuehren"

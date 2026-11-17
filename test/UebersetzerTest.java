@@ -115,6 +115,14 @@ public class UebersetzerTest {
         if (eins && zwei) { ok++; } else { kaputt++; System.out.println("KAPUTT: Zufalls-Meldungen " + eins + "/" + zwei); }
         u = alt;
 
+        // Der Strichpunkt ist überflüssig, mehrere Befehle werden am Endwort getrennt
+        gleich("GIMMA 1 OIDA GIMMA 2 OIDA", "SELECT 1;\nSELECT 2");
+        gleich("GIMMA 1 OIDA;\n-- zwei\nGIMMA 2 OIDA;", "SELECT 1;\n-- zwei\nSELECT 2");
+        gleich("GIMMA 1 OIDA\nERSTÖN TABÖ x (id INT) OIDA\nGIMMA 'OIDA' VO x OIDA",
+                "SELECT 1;\nCREATE TABLE x (id INT);\nSELECT 'OIDA' FROM x");
+        fehler("GIMMA 1 OIDA GIMMA 2", "wo is des OIDA");
+        fehler("GIMMA 1 OIDA SELECT 2 OIDA", "ned SELECT");
+
         // Fehler im Wörterbuch werden beim Laden gemeldet
         ladeFehler("AS = OIS\nALL = OIS", "'OIS' steht schon bei AS");
         ladeFehler("SELECT = GIB'S", "darf nur aus Wörtern bestehen");
