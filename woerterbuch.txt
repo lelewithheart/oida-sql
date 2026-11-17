@@ -177,7 +177,7 @@ COALESCE       = ERSTBESTE
 IFNULL         = FOISNIX
 
 # --- Anzeigen / Infos -------------------------------------------------------
-SHOW           = HERZAGN, LOSS SEHN
+SHOW           = HERZAGN, LOSS SEHN, ZAG HER
 DESCRIBE       = WOS IS, BESCHREIB
 EXPLAIN        = ERKLÄR MA, ERKLÄR
 USE            = NIMM, HER MIT
