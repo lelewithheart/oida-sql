@@ -1,0 +1,30 @@
+<idea-plugin>
+  <id>at.oida.datagrip</id>
+  <name>OIDA-SQL</name>
+  <!-- Die Versionsnummer kommt beim Bauen aus version.txt -->
+  <version>@VERSION@</version>
+  <vendor url="https://github.com/lelewithheart/oida-sql">OIDA-SQL</vendor>
+  <description><![CDATA[
+    MySQL im Dialekt: <code>GIB MA * VON leit OIDA;</code><br>
+    Das Plugin bringt den JDBC-Treiber für OIDA-SQL mit (er wird nach
+    <code>Benutzerordner/.oida-sql/oida-sql.jar</code> gelegt), blendet in DataGrip die Syntaxfehler
+    in OIDA-SQL-Dateien aus, färbt die Dialekt-Wörter ein und führt bei Strg+Enter den Befehl
+    unter dem Cursor aus.
+  ]]></description>
+  <idea-version since-build="251"/>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.database</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <highlightErrorFilter implementation="at.oida.datagrip.OidaFehlerFilter"/>
+    <annotator language="SQL" implementationClass="at.oida.datagrip.OidaFarben"/>
+  </extensions>
+
+  <applicationListeners>
+    <listener class="at.oida.datagrip.OidaVorAusfuehren"
+              topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
+    <listener class="at.oida.datagrip.OidaStart"
+              topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
+</idea-plugin>

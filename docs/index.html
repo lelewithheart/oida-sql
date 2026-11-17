@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OIDA-SQL</title>
+<style>
+  :root { --rot: #c8102e; --tinte: #1c1b1a; --grau: #6b6660; --papier: #fffdf9; --creme: #f6efe4; --linie: #e6dccd; --code: #1e222b; }
+  @media (prefers-color-scheme: dark) {
+    :root { --tinte: #f1ede6; --grau: #a8a199; --papier: #17161a; --creme: #24222a; --linie: #37343f; --code: #0f0e12; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--papier); color: var(--tinte); font: 17px/1.55 "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
+  .fahne { height: 28px; background: linear-gradient(to bottom, var(--rot) 0 33.3%, #fff 33.3% 66.6%, var(--rot) 66.6% 100%); }
+  main { max-width: 780px; margin: 0 auto; padding: 0 16px 64px; }
+  h1 { font-family: Bahnschrift, "Segoe UI Semibold", "Arial Narrow", sans-serif; font-size: clamp(54px, 13vw, 92px); line-height: .95; margin: 40px 0 8px; letter-spacing: -1px; }
+  h1 span { color: var(--rot); }
+  .unter { font-size: 21px; color: var(--grau); margin: 0 0 28px; }
+  h2 { font-family: Bahnschrift, "Segoe UI Semibold", sans-serif; font-size: 25px; margin: 44px 0 12px; display: flex; align-items: center; gap: 12px; }
+  h2::before { content: ""; width: 24px; height: 6px; background: var(--rot); flex: none; }
+  pre, code, .adresse input { font-family: "Cascadia Mono", "Cascadia Code", Consolas, "Courier New", monospace; }
+  pre { background: var(--code); color: #e8e6e1; border-radius: 10px; padding: 18px 20px; font-size: 14.5px; line-height: 1.6; overflow-x: auto; margin: 0; }
+  pre .w { color: #ffb86b; font-weight: 600; } pre .o { color: #ff6b81; font-weight: 700; } pre .t { color: #a5d6a7; }
+  code { background: var(--creme); border: 1px solid var(--linie); border-radius: 4px; padding: 0 5px; font-size: 15px; }
+  .adresse { display: flex; gap: 8px; margin: 12px 0 6px; }
+  .adresse input { flex: 1; min-width: 0; font-size: 15px; padding: 12px 14px; border-radius: 8px; border: 2px solid var(--rot); background: var(--creme); color: var(--tinte); }
+  .adresse button, .knopf { font: inherit; font-weight: 600; cursor: pointer; border: 0; border-radius: 8px; padding: 12px 18px; background: var(--rot); color: #fff; text-decoration: none; display: inline-block; }
+  .adresse button:hover, .knopf:hover { filter: brightness(1.1); }
+  .adresse button:focus-visible, .knopf:focus-visible, .adresse input:focus-visible { outline: 3px solid var(--tinte); outline-offset: 2px; }
+  .klein { color: var(--grau); font-size: 15px; }
+  ol { padding-left: 24px; margin: 8px 0; } ol li { margin: 6px 0; } ol li::marker { color: var(--rot); font-weight: 700; }
+  .schritt { background: var(--creme); border: 1px solid var(--linie); border-radius: 12px; padding: 14px 20px 12px; margin: 14px 0; }
+  .schritt h3 { margin: 0 0 4px; font-family: Bahnschrift, "Segoe UI Semibold", sans-serif; font-size: 20px; }
+  .schritt h3 b { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; background: var(--rot); color: #fff; align-items: center; justify-content: center; margin-right: 8px; font-size: 17px; }
+  .knoepfe { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+  .knopf.hell { background: transparent; color: var(--tinte); border: 2px solid var(--linie); }
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--linie); color: var(--grau); font-size: 15px; }
+  a { color: var(--rot); }
+</style>
+</head>
+<body>
+<div class="fahne"></div>
+<main>
+  <h1><span>OIDA</span>-SQL</h1>
+  <p class="unter">MySQL, aber im Dialekt. Und am Schluss sagst <b>OIDA</b>.</p>
+
+<pre><span class="w">ERSTÖN TABÖN</span> leit (id <span class="w">ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL</span>, name <span class="w">KETTN</span>(50)) <span class="o">OIDA</span>;
+<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>;
+<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="o">OIDA</span>;
+<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span>;</pre>
+
+  <p>Das ist ganz normales MySQL, nur heißen die Wörter anders. Ein kleiner Treiber übersetzt jeden Befehl,
+     bevor er zur Datenbank geht. Du brauchst <b>DataGrip</b> und eine <b>MySQL-Datenbank</b>.</p>
+
+  <h2>Einrichten</h2>
+  <p>DataGrip holt sich alles von dieser Adresse, auch spätere Updates:</p>
+  <div class="adresse">
+    <input id="adresse" type="text" readonly aria-label="Update-Adresse für DataGrip"
+           value="https://lelewithheart.github.io/oida-sql/updatePlugins.xml">
+    <button type="button" id="kopieren">Kopieren</button>
+  </div>
+  <p class="klein" id="version">Aktuelle Version wird geladen …</p>
+
+  <div class="schritt">
+    <h3><b>A</b>Plugin</h3>
+    <ol>
+      <li><b>Settings</b> (<code>Strg+Alt+S</code>) → <b>Plugins</b></li>
+      <li>Zahnrad oben → <b>Manage Plugin Repositories…</b></li>
+      <li><b>+</b> klicken, die Adresse einfügen, <b>OK</b></li>
+      <li>Reiter <b>Marketplace</b>: nach <b>OIDA-SQL</b> suchen, <b>Install</b></li>
+      <li>DataGrip neu starten</li>
+    </ol>
+  </div>
+
+  <div class="schritt">
+    <h3><b>B</b>Treiber</h3>
+    <p class="klein" style="margin: 0;">Den Treiber hat das Plugin schon mitgebracht.</p>
+    <ol>
+      <li><b>File → Data Sources…</b>, links oben der Reiter <b>Drivers</b></li>
+      <li><b>MySQL</b> anklicken und duplizieren (<code>Strg+D</code>). Die Kopie <b>OIDA-SQL</b> nennen.</li>
+      <li>Bei <b>Driver Files</b>: <b>+</b> → <b>Custom JARs…</b> → in deinem Benutzerordner <code>.oida-sql</code> → <code>oida-sql.jar</code><br>
+          <span class="klein">Unter Windows: <code>C:\Users\DEINNAME\.oida-sql\oida-sql.jar</code></span></li>
+      <li>Bei <b>Class</b> auswählen: <code>at.oida.OidaDriver</code></li>
+      <li><b>Apply</b></li>
+    </ol>
+  </div>
+
+  <div class="schritt">
+    <h3><b>C</b>Verbindung</h3>
+    <ol>
+      <li><b>File → Data Sources…</b> → <b>+</b> → <b>OIDA-SQL</b></li>
+      <li>Host, Port, User und Passwort eintragen wie bei normalem MySQL</li>
+      <li><b>Test Connection</b>, dann <b>OK</b></li>
+    </ol>
+  </div>
+
+  <p><b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA;</code> eintippen, Cursor in die Zeile,
+     <code>Strg+Enter</code>. Das ist <code>SHOW TABLES</code>.</p>
+
+  <h2>Updates</h2>
+  <p>Kommen von selbst. DataGrip meldet bei den Plugins, wenn es eine neue Version gibt.
+     Nach dem Update und einem Neustart sind auch Treiber und Wörterbuch neu.</p>
+
+  <h2>Zum Nachlesen</h2>
+  <div class="knoepfe">
+    <a class="knopf" href="Woerterbuch.pdf">Wörterbuch (PDF)</a>
+    <a class="knopf" href="Anleitung.pdf">Anleitung (PDF)</a>
+    <a class="knopf hell" href="https://github.com/lelewithheart/oida-sql">Quellcode auf GitHub</a>
+  </div>
+  <p class="klein">Du weißt ein Wort nicht? Schreib es englisch hin und führ den Befehl aus,
+     die Fehlermeldung sagt dir das richtige.</p>
+
+  <footer>OIDA-SQL · Ohne OIDA geht goa nix.</footer>
+</main>
+<script>
+  document.getElementById('kopieren').addEventListener('click', function () {
+    var feld = document.getElementById('adresse');
+    var knopf = this;
+    function fertig() { knopf.textContent = 'Kopiert'; setTimeout(function () { knopf.textContent = 'Kopieren'; }, 1800); }
+    if (navigator.clipboard) { navigator.clipboard.writeText(feld.value).then(fertig, function () { feld.select(); }); }
+    else { feld.select(); document.execCommand('copy'); fertig(); }
+  });
+  fetch('version.txt', { cache: 'no-store' }).then(function (a) { return a.ok ? a.text() : ''; }).then(function (v) {
+    document.getElementById('version').textContent = v.trim() ? 'Aktuelle Version: ' + v.trim() : '';
+  }).catch(function () { document.getElementById('version').textContent = ''; });
+</script>
+</body>
+</html>

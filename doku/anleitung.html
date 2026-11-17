@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>OIDA-SQL – Anleitung</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+
+<!-- ===================================================== Seite 1 -->
+<div class="seite">
+  <div class="fahne"></div>
+
+  <div class="kopf">
+    <div>
+      <h1><span>OIDA</span>-SQL</h1>
+      <div class="unter">MySQL, aber im Dialekt. Und am Schluss sagst <b>OIDA</b>.</div>
+    </div>
+    <div class="stempel">Ohne OIDA<br>geht goa nix</div>
+  </div>
+
+<pre class="sql"><span class="w">ERSTÖN TABÖN</span> leit (
+    id   <span class="w">ZOI ZÖHT SÖWA MIT HAUPTSCHLISSL</span>,
+    name <span class="w">KETTN</span>(<span class="z">50</span>) <span class="w">MUASS SEI</span>
+) <span class="o">OIDA</span>;
+<span class="w">EINEHAUN IN</span> leit (name) <span class="w">WERTE</span> (<span class="t">'Franz'</span>), (<span class="t">'Resi'</span>) <span class="o">OIDA</span>;
+<span class="w">GIB MA</span> name <span class="w">VON</span> leit <span class="w">WO</span> name <span class="w">SO WIA</span> <span class="t">'F%'</span> <span class="w">DA REIH NOCH</span> name <span class="o">OIDA</span>;
+<span class="w">GUSCH DI TABÖN</span> leit <span class="o">OIDA</span>;</pre>
+
+  <p>Das ist ganz normales MySQL, nur heißen die Wörter anders. Ein kleiner Treiber übersetzt jeden Befehl,
+     bevor er zur Datenbank geht. Du brauchst nur <b>DataGrip</b> und eine <b>MySQL-Datenbank</b>.</p>
+
+  <h2>Einrichten</h2>
+  <p>Einmal machen, dauert drei Minuten. DataGrip holt sich alles von dieser Adresse, auch spätere Updates:</p>
+  <div class="adresse">https://lelewithheart.github.io/oida-sql/updatePlugins.xml</div>
+
+  <div class="karten" style="margin-top: 7mm;">
+    <div class="karte">
+      <div class="buchstabe">A</div>
+      <h3>Plugin</h3>
+      <div class="datei">kommt von der Adresse oben</div>
+      <ol>
+        <li><span class="weg">Settings</span> (<kbd>Strg</kbd> <kbd>Alt</kbd> <kbd>S</kbd>) → <span class="weg">Plugins</span></li>
+        <li>Zahnrad oben → <span class="weg">Manage Plugin Repositories…</span></li>
+        <li><b>+</b> klicken, die Adresse einfügen, <span class="weg">OK</span></li>
+        <li>Reiter <span class="weg">Marketplace</span>: nach <b>OIDA-SQL</b> suchen, <span class="weg">Install</span></li>
+        <li>DataGrip neu starten</li>
+      </ol>
+      <p style="font-size: 8.6pt; color: var(--grau); margin: 2mm 0 0 0;">Updates meldet DataGrip danach von selbst.
+         Nach dem Neustart sind auch Treiber und Wörterbuch neu.</p>
+    </div>
+
+    <div class="karte">
+      <div class="buchstabe">B</div>
+      <h3>Treiber</h3>
+      <div class="datei">hat das Plugin schon mitgebracht</div>
+      <ol>
+        <li><span class="weg">File → Data Sources…</span>, links oben der Reiter <span class="weg">Drivers</span></li>
+        <li><b>MySQL</b> anklicken und duplizieren (<kbd>Strg</kbd> <kbd>D</kbd>). Die Kopie <b>OIDA-SQL</b> nennen.</li>
+        <li>Bei <span class="weg">Driver Files</span>: <b>+</b> → <span class="weg">Custom JARs…</span> → in deinem Benutzerordner
+            <code>.oida-sql</code> → <code>oida-sql.jar</code></li>
+        <li>Bei <span class="weg">Class</span> auswählen:<br><code>at.oida.OidaDriver</code></li>
+        <li><span class="weg">Apply</span></li>
+      </ol>
+    </div>
+
+    <div class="karte">
+      <div class="buchstabe">C</div>
+      <h3>Verbindung</h3>
+      <div class="datei">wie bei normalem MySQL</div>
+      <ol>
+        <li><span class="weg">File → Data Sources…</span> → <b>+</b> → <b>OIDA-SQL</b></li>
+        <li>Host, Port, User und Passwort eintragen</li>
+        <li><span class="weg">Test Connection</span>, dann <span class="weg">OK</span></li>
+      </ol>
+      <p style="font-size: 8.6pt; color: var(--grau); margin: 2mm 0 0 0;">Die Adresse bleibt <span class="mono">jdbc:mysql://…</span>,
+         nur der Treiber ist ein anderer.</p>
+    </div>
+  </div>
+
+  <div class="hinweis">
+    <b>Probier’s aus:</b> Konsole öffnen, <code>HERZAGN DE TABÖN OIDA;</code> eintippen, Cursor in die Zeile,
+    <kbd>Strg</kbd> <kbd>Enter</kbd>. Das ist <span class="mono">SHOW TABLES</span>.
+  </div>
+
+  <div class="fuss"><span>OIDA-SQL · Anleitung</span><span>Seite 1 von 2</span></div>
+</div>
+
+<!-- ===================================================== Seite 2 -->
+<div class="seite">
+  <div class="kopf-klein">
+    <div class="titel"><span>OIDA</span>-SQL</div>
+    <div class="rechts">Benutzen und die wichtigsten Wörter</div>
+  </div>
+
+  <div class="zwei">
+    <div>
+      <h2 style="margin-top: 0;">So geht’s</h2>
+      <ul class="regeln">
+        <li>Befehl schreiben, Cursor hinein, <kbd>Strg</kbd> <kbd>Enter</kbd>.</li>
+        <li>Am Ende von jedem Befehl steht <code>OIDA;</code></li>
+        <li>Englisch geht nicht mehr. Wer <span class="mono">SELECT</span> schreibt, bekommt gesagt, wie es richtig heißt.</li>
+        <li>Groß- und Kleinschreibung ist egal: <code>gib ma</code> geht genauso.</li>
+        <li>Namen von Tabellen und Spalten bleiben, wie sie sind.</li>
+        <li>Heißt eine Spalte wie ein Dialekt-Wort (zum Beispiel <span class="mono">von</span>), dann in Backticks: <code>`von`</code></li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="margin-top: 0;">Was du zu hören bekommst</h2>
+      <div class="blasen">
+        <div class="blase"><span class="wann">OIDA vergessen</span>Heast, wo is des <b>OIDA</b>?</div>
+        <div class="blase"><span class="wann">Englisch geschrieben</span>SELECT? Samma do in Amerika? Bei uns haaßt des <b>GIB MA</b>.</div>
+        <div class="blase"><span class="wann">Tabelle gibt es nicht</span>Na servas! MySQL sogt: Table 'leit' doesn't exist</div>
+      </div>
+      <p style="font-size: 8.8pt; color: var(--grau); margin-top: 2.5mm;">Tipp: Weißt du ein Wort nicht, schreib es englisch hin.
+         Die Fehlermeldung sagt dir das richtige.</p>
+    </div>
+  </div>
+
+  <h2>Die wichtigsten Wörter</h2>
+  <div class="reihe3 spick">
+<div>
+    <div class="gruppe">
+      <h3>Abfragen</h3>
+      <table class="woerter">
+        <tr><td class="en">SELECT</td><td class="oida">GIB MA</td></tr>
+        <tr><td class="en">FROM</td><td class="oida">VON</td></tr>
+        <tr><td class="en">WHERE</td><td class="oida">WO</td></tr>
+        <tr><td class="en">AS</td><td class="oida">OIS</td></tr>
+        <tr><td class="en">DISTINCT</td><td class="oida">EINZIGOATIG</td></tr>
+        <tr><td class="en">ORDER BY</td><td class="oida">DA REIH NOCH</td></tr>
+        <tr><td class="en">ASC / DESC</td><td class="oida">AUFFE / OWE</td></tr>
+        <tr><td class="en">GROUP BY</td><td class="oida">NIMM ZOM NOCH</td></tr>
+        <tr><td class="en">HAVING</td><td class="oida">DER HOT</td></tr>
+        <tr><td class="en">LIMIT</td><td class="oida">HÖCHSTENS</td></tr>
+      </table>
+    </div>
+    <div class="gruppe">
+      <h3>Verbinden</h3>
+      <table class="woerter">
+        <tr><td class="en">JOIN</td><td class="oida">ZAMQUETSCHN</td></tr>
+        <tr><td class="en">LEFT / RIGHT</td><td class="oida">LINKS / RECHTS</td></tr>
+        <tr><td class="en">ON</td><td class="oida">AUF</td></tr>
+      </table>
+    </div>
+    <div class="gruppe">
+      <h3>Daten ändern</h3>
+      <table class="woerter">
+        <tr><td class="en">INSERT INTO</td><td class="oida">EINEHAUN IN</td></tr>
+        <tr><td class="en">VALUES</td><td class="oida">WERTE</td></tr>
+        <tr><td class="en">UPDATE</td><td class="oida">AKTUALISIERN</td></tr>
+        <tr><td class="en">SET</td><td class="oida">SETZN</td></tr>
+        <tr><td class="en">DELETE</td><td class="oida">SCHLEICH DI</td></tr>
+      </table>
+    </div>
+</div>
+<div>
+    <div class="gruppe">
+      <h3>Bedingungen</h3>
+      <table class="woerter">
+        <tr><td class="en">AND / OR</td><td class="oida">UND / ODA</td></tr>
+        <tr><td class="en">NOT</td><td class="oida">NED</td></tr>
+        <tr><td class="en">NULL</td><td class="oida">NUI</td></tr>
+        <tr><td class="en">IN</td><td class="oida">DRINNA</td></tr>
+        <tr><td class="en">LIKE</td><td class="oida">WIA</td></tr>
+        <tr><td class="en">BETWEEN</td><td class="oida">DAZWISCHN</td></tr>
+        <tr><td class="en">EXISTS</td><td class="oida">GIBTS</td></tr>
+        <tr><td class="en">TRUE / FALSE</td><td class="oida">WOAHR / FOISCH</td></tr>
+      </table>
+    </div>
+    <div class="gruppe">
+      <h3>Rechnen</h3>
+      <table class="woerter">
+        <tr><td class="en">COUNT</td><td class="oida">WIAVÜ</td></tr>
+        <tr><td class="en">SUM</td><td class="oida">ZAMZÖHN</td></tr>
+        <tr><td class="en">AVG</td><td class="oida">IM SCHNITT</td></tr>
+        <tr><td class="en">MIN / MAX</td><td class="oida">KLANSTA / GRÖSSTA</td></tr>
+        <tr><td class="en">ROUND</td><td class="oida">PI MOI DAUMEN</td></tr>
+        <tr><td class="en">UPPER</td><td class="oida">SCHREI</td></tr>
+        <tr><td class="en">LOWER</td><td class="oida">FLÜSTER</td></tr>
+      </table>
+    </div>
+    <div class="gruppe">
+      <h3>Datentypen</h3>
+      <table class="woerter">
+        <tr><td class="en">INT</td><td class="oida">ZOI</td></tr>
+        <tr><td class="en">VARCHAR</td><td class="oida">KETTN</td></tr>
+        <tr><td class="en">DATE</td><td class="oida">TOG</td></tr>
+        <tr><td class="en">BOOLEAN</td><td class="oida">JONA</td></tr>
+        <tr><td class="en">TEXT</td><td class="oida">GSCHICHTL</td></tr>
+      </table>
+    </div>
+</div>
+<div>
+    <div class="gruppe">
+      <h3>Tabellen bauen</h3>
+      <table class="woerter">
+        <tr><td class="en">CREATE</td><td class="oida">ERSTÖN</td></tr>
+        <tr><td class="en">TABLE</td><td class="oida">TABÖN</td></tr>
+        <tr><td class="en">ALTER</td><td class="oida">ÄNDER</td></tr>
+        <tr><td class="en">DROP</td><td class="oida">GUSCH DI</td></tr>
+        <tr><td class="en">PRIMARY KEY</td><td class="oida">HAUPTSCHLISSL</td></tr>
+        <tr><td class="en">FOREIGN KEY</td><td class="oida">FREMDSCHLISSL</td></tr>
+        <tr><td class="en">REFERENCES</td><td class="oida">ZAGT AUF</td></tr>
+        <tr><td class="en">NOT NULL</td><td class="oida">MUASS SEI</td></tr>
+        <tr><td class="en">AUTO_INCREMENT</td><td class="oida">ZÖHT SÖWA MIT</td></tr>
+      </table>
+    </div>
+    <div class="gruppe">
+      <h3>Rundherum</h3>
+      <table class="woerter">
+        <tr><td class="en">SHOW TABLES</td><td class="oida">HERZAGN DE TABÖN</td></tr>
+        <tr><td class="en">USE</td><td class="oida">NIMM</td></tr>
+        <tr><td class="en">DESCRIBE</td><td class="oida">WOS IS</td></tr>
+        <tr><td class="en um">START TRANSACTION</td><td class="oida">GEMMA</td></tr>
+        <tr><td class="en">COMMIT</td><td class="oida">DES BLEIBT SO</td></tr>
+        <tr><td class="en">ROLLBACK</td><td class="oida">DES WOA NIX</td></tr>
+      </table>
+    </div>
+    <div class="hinweis" style="margin-top:1mm">Alle Wörter mit allen Varianten stehen im <b>Wörterbuch</b> (<span class="mono">Woerterbuch.pdf</span>).</div>
+</div>
+</div>
+
+    <div class="fuss"><span>OIDA-SQL · Anleitung</span><span>Seite 2 von 2</span></div>
+</div>
+
+</body>
+</html>

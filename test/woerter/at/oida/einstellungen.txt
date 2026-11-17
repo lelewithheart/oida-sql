@@ -1,0 +1,20 @@
+# ============================================================================
+#  OIDA-SQL  -  Einstellungen
+# ============================================================================
+#  Nach dem Ändern:  bauen.bat  doppelklicken.   Als UTF-8 speichern.
+
+# Das Wort, das am Ende von jedem Befehl stehen muss (ein einzelnes Wort).
+endwort = OIDA
+
+# Darf man die englischen Wörter trotzdem noch schreiben?
+#   nein = wer CREATE statt ERSTÖN schreibt, bekommt einen Fehler
+#   ja   = beides geht
+# Betrifft nur Wörter, die im Wörterbuch eine Übersetzung haben.
+englisch_erlaubt = nein
+
+# Fehlermeldung, wenn das Endwort fehlt.
+fehler_kein_endwort = Heast, wo is des OIDA?
+
+# Fehlermeldung, wenn jemand das englische Wort schreibt.
+#   {englisch} = das geschriebene Wort      {dialekt} = wie es richtig heißt
+fehler_englisch = Des haaßt {dialekt}, ned {englisch}!

@@ -1,0 +1,28 @@
+# ============================================================================
+#  OIDA-SQL  -  Einstellungen
+# ============================================================================
+#  Nach dem Ändern:  bauen.bat  doppelklicken.   Als UTF-8 speichern.
+#
+#  Bei den Fehlermeldungen kannst du mehrere Varianten mit | trennen.
+#  Dann wird jedes Mal zufällig eine davon genommen.
+
+# Das Wort, das am Ende von jedem Befehl stehen muss (ein einzelnes Wort).
+endwort = OIDA
+
+# Darf man die englischen Wörter trotzdem noch schreiben?
+#   nein = wer CREATE statt ERSTÖN schreibt, bekommt einen Fehler
+#   ja   = beides geht
+# Betrifft nur Wörter, die im Wörterbuch eine Übersetzung haben.
+englisch_erlaubt = nein
+
+# Fehlermeldung, wenn das Endwort fehlt.
+fehler_kein_endwort = Heast, wo is des OIDA? | Ohne OIDA geht do goa nix. | Na servas, do föhd a OIDA! | Sog amoi, host du des OIDA vergessn? | Des OIDA am Schluss, sunst gibts nix. | Geh bitte. OIDA dazuaschreim, daun red ma weida.
+
+# Fehlermeldung, wenn jemand das englische Wort schreibt.
+#   {englisch} = das geschriebene Wort      {dialekt} = wie es richtig heißt
+fehler_englisch = Des haaßt {dialekt}, ned {englisch}! | {englisch}? Samma do in Amerika? Bei uns haaßt des {dialekt}. | Red deitsch! {dialekt} haaßt des, ned {englisch}. | Na geh, {englisch}... Schreib {dialekt} wia a normaler Mensch.
+
+# Vorspann vor echten Fehlern von MySQL (Tippfehler, Tabelle gibt es nicht,
+# doppelter Schlüssel ...). Die Meldung von MySQL selbst bleibt englisch.
+# Leer lassen = kein Vorspann.
+fehler_mysql = Na servas! MySQL sogt: | Jo eh. MySQL sogt: | Des woa a Schas. MySQL sogt: | So a Bledsinn. MySQL sogt: | Heast, wos soi des? MySQL sogt:

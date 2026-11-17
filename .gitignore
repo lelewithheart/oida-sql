@@ -1,0 +1,9 @@
+# Gebaute Dateien (entstehen durch bauen.bat / veroeffentlichen.bat)
+build/
+/oida-sql.jar
+/oida-sql-datagrip-plugin.jar
+/weitergeben/*.jar
+/weitergeben/*.pdf
+/doku/woerterbuch.html
+__pycache__/
+*.log

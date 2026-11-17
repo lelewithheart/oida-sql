@@ -1,0 +1,42 @@
+# ============================================================================
+#  OIDA-SQL  -  Ausnahmen (Befehle, die OHNE Endwort durchgelassen werden)
+# ============================================================================
+#
+#  DataGrip schickt im Hintergrund selbst SQL an die Datenbank (Tabellenliste
+#  laden, Tabelle per Doppelklick öffnen, Zelle bearbeiten ...). Dort steht
+#  natürlich kein OIDA. Alles, was auf eines der Muster unten passt, wird
+#  deshalb unverändert durchgelassen.
+#
+#  Jede Zeile ist ein regulärer Ausdruck (Groß-/Kleinschreibung egal).
+#  Geprüft wird der Befehl ohne Kommentare und Leerzeichen am Anfang.
+#
+#  Achtung: Jede Ausnahme ist auch ein Schlupfloch - wer genau so einen
+#  Befehl von Hand tippt, kommt ohne OIDA durch.
+#
+#  Wenn in DataGrip etwas nicht geht ("Heast, wo is des OIDA?" bei einer
+#  Aktion, die du nicht selbst getippt hast): Protokoll einschalten (siehe
+#  README.md), nachschauen, welcher Befehl blockiert wurde, und hier ein
+#  Muster dafür ergänzen. Danach bauen.bat.
+#
+# ============================================================================
+
+# --- Metadaten: Tabellen, Spalten, Server-Infos laden -----------------------
+^SHOW\b
+^SET\b
+^USE\b
+\binformation_schema\b
+\bperformance_schema\b
+\bmysql\.\w+
+\bsys\.\w+
+^SELECT\s+(@@|DATABASE\s*\(|SCHEMA\s*\(|VERSION\s*\(|CONNECTION_ID\s*\(|USER\s*\(|CURRENT_USER)
+^SELECT\s+('keep alive'|1)\s*$
+^KILL\b
+
+# --- Tabellenansicht (Doppelklick auf eine Tabelle) -------------------------
+^SELECT\s+t\.\*\s+FROM\b
+^SELECT\s+COUNT\(\*\)\s+FROM\s+\S+\s+t\b
+
+# --- Zellen in der Tabellenansicht bearbeiten -------------------------------
+^UPDATE\s+\S+\s+t\s+SET\s+t\.
+^INSERT\s+INTO\s+[`\w$]+\.[`\w$]+\s*\(
+^DELETE\s+FROM\s+[`\w$]+\.[`\w$]+\s+WHERE\b

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Diese Datei wird von veroeffentlichen.ps1 geschrieben. DataGrip liest sie, um Updates zu finden. -->
+<plugins>
+  <plugin id="at.oida.datagrip" url="https://lelewithheart.github.io/oida-sql/oida-sql-datagrip-plugin-1.2.0.jar" version="1.2.0">
+    <idea-version since-build="251"/>
+    <name>OIDA-SQL</name>
+    <vendor>OIDA-SQL</vendor>
+    <description><![CDATA[MySQL im Dialekt: GIB MA * VON leit OIDA; Bringt den Treiber mit, blendet die Syntaxfehler aus und faerbt die Dialekt-Woerter ein.]]></description>
+  </plugin>
+</plugins>

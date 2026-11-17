@@ -1,0 +1,172 @@
+/* Gemeinsames Aussehen für Anleitung und Wörterbuch (wird mit Edge als PDF gedruckt). */
+@page { size: A4; margin: 0; }
+
+:root {
+  --rot: #c8102e;
+  --rot-dunkel: #9d0c24;
+  --tinte: #1c1b1a;
+  --grau: #6b6660;
+  --papier: #fffdf9;
+  --creme: #f6efe4;
+  --linie: #e6dccd;
+  --code-bg: #1e222b;
+  --code-text: #e8e6e1;
+  --code-wort: #ffb86b;
+  --code-oida: #ff6b81;
+  --code-text-gruen: #a5d6a7;
+  --code-zahl: #82c8ff;
+}
+
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: var(--tinte);
+  background: var(--papier);
+}
+
+.seite {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 0 16mm 14mm 16mm;
+  position: relative;
+  page-break-after: always;
+  break-after: page;
+  background: var(--papier);
+}
+.seite:last-child { page-break-after: auto; break-after: auto; }
+
+/* Rot-weiß-roter Streifen ganz oben */
+.fahne { height: 9mm; margin: 0 -16mm; background: linear-gradient(to bottom, var(--rot) 0 33.3%, #fff 33.3% 66.6%, var(--rot) 66.6% 100%); }
+
+.kopf { padding: 9mm 0 6mm 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 8mm; }
+.kopf h1 {
+  font-family: "Bahnschrift", "Segoe UI Semibold", "Arial Narrow", sans-serif;
+  font-size: 46pt; line-height: 0.95; margin: 0; letter-spacing: -0.5pt; font-weight: 700;
+}
+.kopf h1 span { color: var(--rot); }
+.kopf .unter { font-size: 13pt; color: var(--grau); margin-top: 3mm; }
+.stempel {
+  flex: none; border: 1.2mm solid var(--rot); color: var(--rot); border-radius: 3mm;
+  padding: 2mm 4mm; font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-weight: 700;
+  font-size: 12pt; text-transform: uppercase; letter-spacing: 1pt; transform: rotate(-6deg); text-align: center; line-height: 1.15;
+}
+
+.kopf-klein { display: flex; align-items: baseline; justify-content: space-between; padding: 7mm 0 4mm 0; border-bottom: 0.4mm solid var(--tinte); margin-bottom: 5mm; }
+.kopf-klein .titel { font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-weight: 700; font-size: 16pt; }
+.kopf-klein .titel span { color: var(--rot); }
+.kopf-klein .rechts { color: var(--grau); font-size: 9.5pt; }
+
+h2 {
+  font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-size: 15pt; font-weight: 700;
+  margin: 7mm 0 3mm 0; display: flex; align-items: center; gap: 3mm;
+}
+h2::before { content: ""; width: 6mm; height: 1.6mm; background: var(--rot); display: inline-block; }
+h3 { font-size: 10.5pt; margin: 0 0 1.5mm 0; }
+p { margin: 0 0 2.5mm 0; }
+
+code, .mono { font-family: "Cascadia Mono", "Cascadia Code", Consolas, "Courier New", monospace; }
+code { background: var(--creme); border: 0.2mm solid var(--linie); border-radius: 1mm; padding: 0 1.2mm; font-size: 9.5pt; white-space: nowrap; }
+kbd {
+  font-family: "Segoe UI", sans-serif; font-size: 8.5pt; background: #fff; border: 0.25mm solid #b9b0a3;
+  border-bottom-width: 0.7mm; border-radius: 1.2mm; padding: 0.2mm 1.6mm; white-space: nowrap;
+}
+.weg { font-weight: 600; white-space: nowrap; }
+
+/* Dunkler Code-Kasten */
+pre.sql {
+  font-family: "Cascadia Mono", "Cascadia Code", Consolas, monospace; font-size: 9.6pt; line-height: 1.55;
+  background: var(--code-bg); color: var(--code-text); border-radius: 2.5mm; padding: 4.5mm 5.5mm; margin: 0 0 3mm 0;
+  white-space: pre-wrap; break-inside: avoid;
+}
+pre.sql .w { color: var(--code-wort); font-weight: 600; }
+pre.sql .o { color: var(--code-oida); font-weight: 700; }
+pre.sql .t { color: var(--code-text-gruen); }
+pre.sql .z { color: var(--code-zahl); }
+pre.sql .k { color: #8b93a3; font-style: italic; }
+
+/* Karten für die Einrichtung */
+.karten { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+.karte { background: #fff; border: 0.3mm solid var(--linie); border-radius: 3mm; padding: 4mm 4.5mm 3mm 4.5mm; break-inside: avoid; position: relative; }
+.karte .buchstabe {
+  position: absolute; top: -3.5mm; left: 4mm; width: 9mm; height: 9mm; border-radius: 50%;
+  background: var(--rot); color: #fff; font-family: "Bahnschrift", sans-serif; font-weight: 700; font-size: 13pt;
+  display: flex; align-items: center; justify-content: center;
+}
+.karte h3 { margin: 4mm 0 0.5mm 0; font-size: 12pt; font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; }
+.karte .datei { color: var(--grau); font-size: 8.5pt; margin-bottom: 2mm; }
+.karte ol { margin: 0; padding-left: 4.5mm; font-size: 9.3pt; line-height: 1.4; }
+.karte ol li { margin-bottom: 1.6mm; padding-left: 0.5mm; }
+.karte ol li::marker { color: var(--rot); font-weight: 700; }
+
+.zwei { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6mm; align-items: start; }
+
+ul.regeln { list-style: none; margin: 0; padding: 0; }
+ul.regeln li { padding: 1.6mm 0 1.6mm 7mm; position: relative; border-bottom: 0.2mm dashed var(--linie); }
+ul.regeln li:last-child { border-bottom: none; }
+ul.regeln li::before { content: ""; position: absolute; left: 0.5mm; top: 3.6mm; width: 3.2mm; height: 3.2mm; background: var(--rot); border-radius: 0.6mm; transform: rotate(45deg); }
+
+/* Fehlermeldungen als Sprechblasen */
+.blasen { display: flex; flex-direction: column; gap: 2.5mm; }
+.blase { background: var(--creme); border-radius: 3mm; padding: 2.5mm 4mm; font-size: 10pt; position: relative; border: 0.2mm solid var(--linie); break-inside: avoid; }
+.blase .wann { display: block; font-size: 8pt; color: var(--grau); text-transform: uppercase; letter-spacing: 0.6pt; margin-bottom: 0.5mm; }
+.blase b { color: var(--rot-dunkel); }
+
+/* Die Update-Adresse zum Abtippen oder Kopieren */
+.adresse {
+  font-family: "Cascadia Mono", "Cascadia Code", Consolas, monospace; font-size: 11pt; font-weight: 600;
+  background: var(--code-bg); color: #fff; border-radius: 2.5mm; padding: 3mm 5mm; text-align: center;
+  letter-spacing: 0.2pt; break-inside: avoid;
+}
+
+.hinweis { background: #fff; border-left: 1.5mm solid var(--rot); padding: 3mm 4.5mm; border-radius: 0 2mm 2mm 0; margin: 4mm 0 0 0; break-inside: avoid; }
+
+.fuss { position: absolute; left: 16mm; right: 16mm; bottom: 7mm; display: flex; justify-content: space-between; font-size: 8pt; color: var(--grau); border-top: 0.2mm solid var(--linie); padding-top: 2mm; }
+
+/* Tabellen (Spickzettel und Wörterbuch) */
+table.woerter { width: 100%; border-collapse: collapse; font-size: 9.3pt; }
+table.woerter td { padding: 0.7mm 1.5mm; line-height: 1.2; vertical-align: baseline; border-bottom: 0.2mm solid var(--linie); }
+table.woerter tr:last-child td { border-bottom: none; }
+table.woerter td.en { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.4pt; color: var(--grau); width: 36%; white-space: nowrap; }
+
+/* Spickzettel in der Anleitung: drei feste Spalten, etwas enger gesetzt */
+.reihe3 { display: flex; gap: 6mm; align-items: flex-start; }
+.reihe3 > div { flex: 1 1 0; min-width: 0; }
+.spick .gruppe { margin-bottom: 3.5mm; }
+.spick .gruppe h3 { font-size: 9.5pt; padding: 1mm 2.5mm; }
+.spick table.woerter td { padding: 0.55mm 1.2mm; line-height: 1.15; }
+/* Das Dialekt-Wort bleibt in einer Zeile. Nur besonders lange englische Einträge (Klasse "um") dürfen umbrechen. */
+.spick table.woerter td.en { width: 1%; padding-right: 2mm; font-size: 7.6pt; }
+.spick table.woerter td.en.um { white-space: normal; }
+.spick table.woerter td.oida { font-size: 9.6pt; white-space: nowrap; }
+table.woerter td.oida { font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-weight: 600; font-size: 10pt; letter-spacing: 0.2pt; }
+table.woerter td.oida .oder { color: var(--grau); font-weight: 400; font-family: "Segoe UI", sans-serif; font-size: 8pt; padding: 0 1mm; }
+table.woerter td.oida .auch { color: var(--grau); font-weight: 400; font-family: "Segoe UI", sans-serif; font-size: 7.6pt; margin-left: 1.5mm; }
+
+.spalten { column-count: 2; column-gap: 8mm; }
+.spalten-3 { column-count: 3; column-gap: 6mm; }
+.gruppe { break-inside: avoid; margin: 0 0 5mm 0; }
+.gruppe h3 {
+  font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-size: 10.5pt; text-transform: uppercase; letter-spacing: 0.7pt;
+  color: #fff; background: var(--rot); padding: 1.2mm 2.5mm; border-radius: 1.2mm; margin: 0 0 1mm 0;
+}
+.gruppe.hell h3 { background: var(--tinte); }
+
+table.abc { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
+table.abc td { padding: 0.4mm 1mm; line-height: 1.2; border-bottom: 0.15mm solid var(--linie); vertical-align: baseline; }
+table.abc td.oida { font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-weight: 600; font-size: 8.6pt; }
+/* Das englische Wort darf umbrechen, damit in schmalen Spalten nichts übereinander läuft */
+table.abc td.en { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.4pt; color: var(--grau); text-align: right; overflow-wrap: anywhere; }
+.anfang { font-family: "Bahnschrift", sans-serif; font-weight: 700; color: var(--rot); font-size: 11.5pt; line-height: 1.2; margin: 3mm 0 0.5mm 0; break-after: avoid; }
+
+/* Abc-Teil des Wörterbuchs: eine Zeile je Wort. Passt das englische Wort nicht mehr daneben,
+   rutscht es als Ganzes in die nächste Zeile (kein Umbruch mitten im Wort). */
+.abcblock { break-inside: avoid; }
+.abcblock .z { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 2mm;
+  padding: 0.3mm 1mm; border-bottom: 0.15mm solid var(--linie); line-height: 1.2; }
+.abcblock .o { font-family: "Bahnschrift", "Segoe UI Semibold", sans-serif; font-weight: 600; font-size: 8.3pt; }
+.abcblock .e { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.2pt; color: var(--grau); white-space: nowrap; margin-left: auto; }

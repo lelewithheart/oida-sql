@@ -1,0 +1,16 @@
+# Test-Wörterbuch (nur für die Tests, nicht das echte)
+CREATE   = ERSTÖN
+TABLE    = TABÖ
+SELECT   = GIMMA, ZAG MA
+FROM     = VO
+WHERE    = WOS
+INSERT   = EINEHAUN
+INTO     = EINE
+VALUES   = WERTE
+DELETE   = SCHLEICH DI
+DROP     = WEGHAUN
+ORDER BY = SORTIER NOCH
+COUNT    = ZÖH
+AND      = UND
+INT      =
+VARCHAR  =

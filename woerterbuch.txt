@@ -1,0 +1,258 @@
+# ============================================================================
+#  OIDA-SQL  -  Wörterbuch
+# ============================================================================
+#
+#  Links steht das MySQL-Wort, rechts schreibst du dein Wort hin:
+#
+#      CREATE = ERSTÖN
+#
+#  Regeln:
+#   - Rechts leer lassen  ->  das Wort bleibt englisch.
+#   - Mehrere Varianten mit Beistrich:      SELECT = GIB MA, ZAG MA
+#   - Rechts dürfen mehrere Wörter stehen:  DELETE = SCHLEICH DI
+#   - Du kannst eigene Zeilen dazuschreiben, auch mit mehreren Wörtern links:
+#                                           ORDER BY = DA REIH NOCH
+#   - Steht rechts auch das englische Wort selbst (INDEX = VERZEICHNIS, INDEX),
+#     dann bleibt das englische Wort zusätzlich erlaubt.
+#   - Groß-/Kleinschreibung ist egal (erstön = ERSTÖN = Erstön).
+#   - Zeilen mit # am Anfang sind Kommentare.
+#   - Ein Dialekt-Wort darf nur bei EINEM MySQL-Wort stehen
+#     (sonst meldet bauen.bat einen Fehler und sagt dir, welches).
+#
+#  Achtung bei Wörtern, die auch als Spalten- oder Tabellenname vorkommen
+#  (VON, ENDE, WERTE ...): als Name in Backticks schreiben, z.B. `von`.
+#
+#  Nach dem Ändern:  bauen.bat  doppelklicken  ->  oida-sql.jar ist neu.
+#  Diese Datei als UTF-8 speichern (wegen Ö, Ä, Ü, ß).
+#
+# ============================================================================
+
+
+# --- Daten abfragen ---------------------------------------------------------
+SELECT         = GIB MA, ZAG MA
+FROM           = VON
+WHERE          = WO
+AS             = OIS, HAASST
+DISTINCT       = EINZIGOATIG
+ALL            = OLLE, OLLAS
+ORDER          = SORTIERN
+BY             = NOCH
+ASC            = AUFSTEIGND, AUFFE
+DESC           = OSTEIGND, OWE
+GROUP          = GRUPPIER, NIMM ZOM
+HAVING         = DER HOT
+LIMIT          = GRENZ, HÖCHSTENS
+OFFSET         = OBSTOND, ÜBERSPRING
+UNION          = ZAMMGLEGT, VEREINT
+INTERSECT      = WOS BEIDE HOM, GEMEINSAM
+EXCEPT         = AUSSA, OHNE
+WITH           = MIT
+RECURSIVE      = REKURSIV, IMMA WIEDA
+
+# --- Tabellen verbinden -----------------------------------------------------
+JOIN           = ZAMQUETSCHN, VERBANDLN
+INNER          = INNAN
+LEFT           = LINKS
+RIGHT          = RECHTS
+OUTER          = AUSSN
+CROSS          = KREIZUNDQUER, KREIZ
+NATURAL        = SÖBSTVERSTÄNDLICH, NATÜRLICH
+ON             = AUF
+USING          = BENUTZN, ÜBA
+
+# --- Bedingungen ------------------------------------------------------------
+AND            = UND
+OR             = ODA
+NOT            = NED
+XOR            = XOR, ENTWEDA ODA
+IN             = DRINNA
+BETWEEN        = DAZWISCHN
+LIKE           = WIA, SO WIA
+REGEXP         = REGEXP, PASST ZU
+IS             = IS
+EXISTS         = EXISTIERT, GIBTS
+ANY            = IRGENDWOS, IRGENDANA
+SOME           = A POA, MANCHE
+CASE           = KOMMT DRAUF AU, JE NOCHDEM
+WHEN           = FOIS
+THEN           = DAUN
+ELSE           = ANSUNSTN, SUNST
+END            = AUFHÖRN, ENDE, PASST SCHO
+IF             = WENN, WAUN
+
+# --- Werte ------------------------------------------------------------------
+NULL           = NUI, NIX
+TRUE           = WOAHR, STIMMT
+FALSE          = FOISCH, SCHMARRN, STIMMT NED
+DEFAULT        = STANDARD, NORMALERWEIS
+
+# --- Daten ändern -----------------------------------------------------------
+INSERT         = EINEHAUN
+INTO           = IN
+VALUES         = WERTE
+UPDATE         = AKTUALISIERN, AUSBESSERN
+SET            = SETZN
+DELETE         = SCHLEICH DI, LÖSCHN
+REPLACE        = ERSETZN, AUSTAUSCHN
+TRUNCATE       = AUSRAMA, LAARMOCHN
+IGNORE         = IGNORIER, WURSCHT
+DUPLICATE      = DUPLIKAT, DOPPLTE
+
+# --- Struktur anlegen / ändern / löschen ------------------------------------
+CREATE         = ERSTÖN
+ALTER          = ÄNDER
+DROP           = ZAMHAUN, GUSCH DI
+RENAME         = NOM ÄNDERN, UMBENENNEN
+TABLE          = TABÖN, TABÖ
+DATABASE       = DATNBONK, DE BANK DER DATN
+SCHEMA         = SCHEMA
+VIEW           = AUSICHT, ANSICHT
+INDEX          = VERZEICHNIS, INDEX
+COLUMN         = SPOITN
+ADD            = DAZUA, DAZUAHAUN
+MODIFY         = UMBAUN
+CHANGE         = TAUSCHN
+TO             = ZU, ZUA
+TEMPORARY      = AUF DE SCHNÖLLE, KURZFRISTIG
+AFTER          = HINTA, NOCHA
+FIRST          = ZERST, GONZ VURN
+
+# --- Spalten-Eigenschaften und Schlüssel ------------------------------------
+PRIMARY        = HAUPT
+FOREIGN        = FREMD, ZUAGRASTA
+KEY            = SCHLISSL
+REFERENCES     = ZAGT AUF, VERWEIST AUF
+UNIQUE         = EINMOLIG, NUR AMOI
+CONSTRAINT     = VURSCHRIFT
+CHECK          = SCHAU OB, PRÜF
+AUTO_INCREMENT = ZÖHT SÖWA MIT, SÖWA_ZÖHN
+UNSIGNED       = OHNE MINUS, NUR PLUS
+CASCADE        = DOMINO
+RESTRICT       = VERBOTN, DES GEHT NED
+NO             = KA
+ACTION         = ÄKTSCHN
+COMMENT        = SENF, KOMMENTA
+ENGINE         = MOTA, MASCHIN
+CHARSET        = ZEICHNSOTZ
+COLLATE        = SORTIERREGL
+
+# --- Datentypen -------------------------------------------------------------
+INT            = ZOI
+INTEGER        = GANZZOI
+TINYINT        = WINZIZOI
+SMALLINT       = KLANEZOI
+BIGINT         = RIESNZOI
+DECIMAL        = KOMMAZOI
+FLOAT          = GLEITZOI
+DOUBLE         = DOPPLZOI
+BOOLEAN        = JONA, WOAHRFOISCH
+CHAR           = ZEICHN
+VARCHAR        = KETTN, ZEICHNKETTN
+TEXT           = GSCHICHTL, TEXTL
+BLOB           = BATZN, KLUMPN
+DATE           = TOG
+TIME           = ZEID
+DATETIME       = TOGZEID
+TIMESTAMP      = ZEIDSTEMPE
+YEAR           = JOAHR
+ENUM           = AUSWOI
+JSON           = TSCHEISON, JSON
+
+# --- Funktionen -------------------------------------------------------------
+COUNT          = ZÖH, WIAVÜ
+SUM            = ZAMZÖHN, SUMMIER
+AVG            = IM SCHNITT, MITTLWERT
+MIN            = KLANSTA
+MAX            = GRÖSSTA
+CONCAT         = ZAMPICKN
+GROUP_CONCAT   = GRUPPN_ZAMPICKN
+LENGTH         = LÄNGN
+UPPER          = SCHREI, GROSS
+LOWER          = FLÜSTER, KLAN
+SUBSTRING      = STICKL
+ROUND          = PI MOI DAUMEN, RUNDN
+NOW            = JETZAD
+CURDATE        = HEIT
+COALESCE       = ERSTBESTE
+IFNULL         = FOISNIX
+
+# --- Anzeigen / Infos -------------------------------------------------------
+SHOW           = HERZAGN, LOSS SEHN
+DESCRIBE       = WOS IS, BESCHREIB
+EXPLAIN        = ERKLÄR MA, ERKLÄR
+USE            = NIMM, HER MIT
+TABLES         = DE TABÖN, DE TISCHE, TABELLN
+DATABASES      = DE DATNBONKN, DATNBONKN
+COLUMNS        = DE SPOITN
+
+# --- Transaktionen ----------------------------------------------------------
+START          = LOS
+TRANSACTION    = GSCHÄFT, TRANSAKTIAUN
+BEGIN          = AUF GEHTS, PACK MAS
+COMMIT         = DES BLEIBT SO, FIXIERN
+ROLLBACK       = DES WOA NIX, ZRUCKDRAHN
+SAVEPOINT      = MERK DA, SPEICHAPUNKT
+LOCK           = ZUASPERRN
+UNLOCK         = AUFSPERRN
+
+# --- Benutzer und Rechte ----------------------------------------------------
+GRANT          = ERLAUB
+REVOKE         = VERBIET, WEGNEHMA
+PRIVILEGES     = EXTRAWÜRSCHT, PRIVILEGIEN
+USER           = HAWARA, BENUTZA
+IDENTIFIED     = AUSGWIESN
+
+# --- Prozeduren, Funktionen, Trigger ----------------------------------------
+PROCEDURE      = PROZEDUA, OBLAUF
+FUNCTION       = FUNKTIAUN
+TRIGGER        = AUSLÖSA, OBZUG
+RETURNS        = GIBT ZRUCK
+RETURN         = GIB ZRUCK
+CALL           = RUAF AU, RUAF
+DECLARE        = SOG AU, DEKLARIER
+WHILE          = SOLONG
+DO             = TUA, MOCH
+LOOP           = RINGLSPÜ, SCHLEIFN
+REPEAT         = NOMOI
+UNTIL          = BIS DASS
+LEAVE          = HAU OB, VERLOSS
+BEFORE         = VURM, BEVUA
+EACH           = JEDE
+ROW            = ZEILN
+FOR            = FIA
+
+# --- Fensterfunktionen, Datum und Sonstiges ---------------------------------
+OVER           = DRÜBA
+PARTITION      = AUFTEILN
+ROW_NUMBER     = ZEILNNUMMA
+RANK           = PLOTZ
+DENSE_RANK     = DICHTA_PLOTZ
+DATE_FORMAT    = TOG_SCHEHMOCHN
+STR_TO_DATE    = KETTN_ZU_TOG
+DATE_ADD       = TOG_DAZUA
+DATEDIFF       = TOG_UNTASCHIED
+INTERVAL       = ZEIDRAUM
+DAY            = TAGL
+WEEK           = WOCHN
+MONTH          = MONAD
+HOUR           = STUND
+MINUTE         = MINUTN
+SECOND         = SEKUNDN
+GENERATED      = AUSGRECHNET
+ALWAYS         = IMMA
+VIRTUAL        = VIRTUELL
+VISIBLE        = SICHTBOA
+ENABLE         = AUFDRAHN
+DISABLE        = OBDRAHN
+FLUSH          = SPÜLN
+
+# --- Ganze Ausdrücke (mehrere Wörter links) ---------------------------------
+ORDER BY          = DA REIH NOCH
+PRIMARY KEY       = HAUPTSCHLISSL
+FOREIGN KEY       = FREMDSCHLISSL
+NOT NULL          = MUASS SEI
+IF NOT EXISTS     = WENNS NO NED GIBT
+IF EXISTS         = WENNS DES GIBT
+NO ACTION         = NIX TUAN
+START TRANSACTION = GEMMA
+IDENTIFIED BY     = MITM PASSWURT
